@@ -213,6 +213,8 @@
     .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
   }
 </style>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>emailjs.init('RiPcipn1VHMdK_ure');</script>
 </head>
 <body>
 
@@ -515,6 +517,30 @@
     const service = form.querySelector('select') ? form.querySelector('select').value : '';
     const date = form.querySelector('input[type="date"]') ? form.querySelector('input[type="date"]').value : '';
     const notes = form.querySelector('textarea') ? form.querySelector('textarea').value : '';
-    const subject = encodeURIComponent('New Service Enquiry - Ada Auto Services');
-    const body = encodeURIComponent('New enquiry from the website:\n\nName: ' + name + '\nPhone: ' + phone + '\nVehicle: ' + vehicle + '\nService: ' + service + '\nPreferred Date: ' + date + '\nNotes: ' + notes);
-    window.location.href = 'mailto:faikmola@yahoo.com.au?sub
+
+    const templateParams = {
+      from_name: name,
+      phone: phone,
+      vehicle: vehicle,
+      service: service,
+      date: date,
+      message: notes
+    };
+
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    emailjs.send('service_4a80dle', 'template_9oiq56t', templateParams)
+      .then(() => {
+        btn.textContent = 'Enquiry Sent!';
+        form.reset();
+      }, (error) => {
+        btn.textContent = 'Send Enquiry';
+        btn.disabled = false;
+        alert('Something went wrong. Please call us directly on (02) 9516 1350.');
+      });
+  }
+
+</script>
+</body>
+</html>
