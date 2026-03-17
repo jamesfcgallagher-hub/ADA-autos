@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ada Auto Services — Camperdown, Sydney</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚗</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
@@ -30,21 +29,6 @@
     font-family: 'DM Sans', sans-serif; font-weight: 300;
     overflow-x: hidden;
   }
-  .cursor {
-    width: 10px; height: 10px; background: var(--red);
-    border-radius: 50%; position: fixed; top: 0; left: 0;
-    pointer-events: none; z-index: 9999;
-    transform: translate(-50%,-50%); transition: transform 0.15s ease;
-    mix-blend-mode: multiply;
-  }
-  .cursor-ring {
-    width: 34px; height: 34px; border: 1.5px solid rgba(212,43,43,0.6);
-    border-radius: 50%; position: fixed; top: 0; left: 0;
-    pointer-events: none; z-index: 9998;
-    transform: translate(-50%,-50%);
-    transition: left 0.08s ease, top 0.08s ease;
-  }
-
   /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 200;
@@ -219,8 +203,7 @@
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+
 
 <nav>
   <a href="#" class="nav-logo"><span class="logo-ada">ADA</span> <span class="logo-auto">AUTO</span></a>
@@ -484,15 +467,6 @@
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  const cur = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
-  let mx = 0, my = 0;
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    cur.style.left = mx + 'px'; cur.style.top = my + 'px';
-  });
-  setInterval(() => { ring.style.left = mx + 'px'; ring.style.top = my + 'px'; }, 80);
-
   // Scroll reveal - with fallback to show all if observer doesn't fire
   const reveals = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
@@ -521,20 +495,17 @@
 
     const templateParams = {
       from_name: name,
-      name: name,
-      title: 'New Enquiry - Ada Auto Services',
       phone: phone,
       vehicle: vehicle,
       service: service,
       date: date,
-      message: notes,
-      email: ''
+      message: notes
     };
 
     btn.textContent = 'Sending...';
     btn.disabled = true;
 
-    emailjs.send('service_znicjbw', 'template_9oiq56t', templateParams)
+    emailjs.send('service_4a80dle', 'template_9oiq56t', templateParams)
       .then(() => {
         btn.textContent = 'Enquiry Sent!';
         form.reset();
